@@ -1,13 +1,24 @@
+   /*
+    *******************************************************************************************************
+    * SSSSSSS   69   NN   NN    GGGGGGG  ->MAINTAINER : Aditya Kumar Singh
+    * s              NNo  NN    G        ->#Sing : A Voice Automated AI Chatbot				  
+    * SSSSSSS   []   NNNN NN    G  gggG  ->If anything gets messed up it's chatGPT's fault        
+    *       s   []   NN NNNN    G  '  G  ->IDK how to do this correctly  				  
+    * SSSSSSS   []   NN  NNN    GGGGGGG  -> Blockchain, stable, Algorithm and other Programming Buzzwords
+    *******************************************************************************************************
+    */
+
+
 #include <stdio.h>
 #include <curl/curl.h>
 #include <stdlib.h>
 #include <string.h>
-#include <cJSON.h>
+#include <cjson/cJSON.h>
 
 #define LENGTH 1000
 
 //callback function -> for testing it will just print the data on the next phase
-//it will pass the contents to the next file
+//it will pass the contents to the next file using fprintf
 
 size_t callback(void* contents, size_t size, size_t nrecdata, /*@unused@*/ void* ignorethis)
 
@@ -17,11 +28,13 @@ size_t callback(void* contents, size_t size, size_t nrecdata, /*@unused@*/ void*
 	if(data == NULL) 
 	{
 		fprintf(stderr, "Failed to allocate Data variable");
+		return 1;	
+		
 	}
 					    
 	
 	data[net_size] = '\0';
-	memcpy(data, contents, net_size + 1);
+	memcpy(data, contents, net_size);
 
 	printf("%s/n" , data);
 	free(data);
@@ -36,13 +49,13 @@ int main(void)
 	fgets(text, LENGTH , file);
 	fclose(file);
     //remove newline character and replace it with null terminator just in case	
-	size_t len = strlen(text);
+	size_t len = strlen(text); // possible redundancy here
 	if(len > 0 && text[len - 1] == '\n')
 	{
 		text[len - 1] = '\0';	
 	}
 
-/*---------------------------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------------------------------------*/
 
     // Initialization
 	CURL *curl = curl_easy_init();
@@ -59,22 +72,15 @@ int main(void)
    if (curl)
    {
 	
-	//i mademy life easier by using cJSON to interpret the json, so much more readble	
 	cJSON *root = cJSON_CreateObject();
 	if(root == NULL) {fprintf(stderr, "cJSON failed to create JSON object");}
-        cJSON_AddStringToObject(root, "prompt", text);
-        cJSON_AddNumberToObject(root, "temperature", 0);
-        cJSON_AddNumberToObject(root, "max_tokens", 1000);
-        cJSON_AddNumberToObject(root, "top_p", 1);
-        cJSON_AddNumberToObject(root, "frequency_penalty", 0.0);
-        cJSON_AddNumberToObject(root, "presence_penalty", 0.0);
-	
-	char* json_string = cJSON_Print(root);
+	cJSON_AddStringToObject(root, "prompt", text);
+	cJSON_AddNumberToObject(root, "max_tokens", 1000);
+	cJSON_AddNumberToObject(root, "temperature", 0);
 
-	char pass_data[strlen(json_string) + 1 + LENGTH];
+	const char* json_string = (char*)cJSON_Print(root);	
 
-	strcpy(pass_data, json_string);
-	strcat(pass_data, "\0");
+
 	struct curl_slist* header = NULL;
 
 	
@@ -84,29 +90,31 @@ int main(void)
 	if(header == NULL) 
 	{
 		fprintf(stderr, "could not append params to header variable");
+		return 1;
 	}
 
 
-	curl_easy_setopt(curl, CURLOPT_URL, "https://api.openai.com/v1/engines/text-davinci-003/completions");
-	curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header);
-	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, pass_data);
+	curl_easy_setopt(curl, CURLOPT_URL, "https://api.openai.com/v1/engines/text-davinci-003/completions");//api call
+	curl_easy_setopt(curl, CURLOPT_HTTPHEADER, header); // request header
+	curl_easy_setopt(curl, CURLOPT_POSTFIELDS, json_string); //request body
 
 	
 	curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback);
-	curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL); //basically we're not using the ignorethis param in callback() so this sets the ignorethis to NULL
-        
-	free(json_string);
+	curl_easy_setopt(curl, CURLOPT_WRITEDATA, NULL); /*basically we're not using the ignorethis param in
+								 callback() so this sets the ignorethis to NULL*/        
+
+		
 	cJSON_Delete(root);
-    }
+   }
     
     //MAIN CODE(2) -> Perform previously set options
     CURLcode result = curl_easy_perform(curl);
     if (result != CURLE_OK)
     {
         fprintf(stderr, "CurlPerformError: %s\n", curl_easy_strerror(result));
+	return 1;
     }
     
-	
 	curl_easy_cleanup(curl);
 	return 0;
 }
