@@ -1,4 +1,4 @@
-# Sing -> Voice Automated AI Powered Chatbot
+# Sing : Voice Automated AI Powered Chatbot
 ## Maintainer: Aditya Kumar Singh
 
 ### there are three main things happening
