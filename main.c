@@ -1,11 +1,12 @@
    /*
     *******************************************************************************************************
-    * SSSSSSS   69   NN   NN    GGGGGGG  ->MAINTAINER : Aditya Kumar Singh
-    * s              NNo  NN    G        ->#Sing : A Voice Automated AI Chatbot				  
-    * SSSSSSS   []   NNNN NN    G  gggG  ->If anything gets messed up it's chatGPT's fault        
-    *       s   []   NN NNNN    G  '  G  ->IDK how to do this correctly  				  
-    * SSSSSSS   []   NN  NNN    GGGGGGG  -> Blockchain, stable, Algorithm and other Programming Buzzwords
-    *******************************************************************************************************
+ _______  ___   __    _  _______ 
+|       ||   | |  |  | ||       | ->MAINTAINER : Aditya Kumar Singh									
+|  _____||   | |   |_| ||    ___|  ->#A Voice Automated AI Chatbot 																		
+| |_____ |   | |       ||   | __   ->If anything gets messed up it's chatGPT's fault															
+|_____  ||   | |  _    ||   ||  |   ->Blockchain, stable, Algorithm and other Programming Buzzwords																
+ _____| ||   | | | |   ||   |_| |																
+|_______||___| |_|  |__||_______|         																
     */
 
 
