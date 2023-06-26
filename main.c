@@ -2,9 +2,9 @@
     *******************************************************************************************************
  _______  ___   __    _  _______ 
 |       ||   | |  |  | ||       | ->MAINTAINER : Aditya Kumar Singh									
-|  _____||   | |   |_| ||    ___|  ->#A Voice Automated AI Chatbot 																		
-| |_____ |   | |       ||   | __   ->If anything gets messed up it's chatGPT's fault															
-|_____  ||   | |  _    ||   ||  |   ->Blockchain, stable, Algorithm and other Programming Buzzwords																
+|  _____||   | |   |_| ||    ___|  ->#A Voice Automated AI Chatbot powered by ChatGPT (OpenAI) API																		
+| |_____ |   | |       ||   | __   															
+|_____  ||   | |  _    ||   ||  |  																
  _____| ||   | | | |   ||   |_| |																
 |_______||___| |_|  |__||_______|         																
     */
