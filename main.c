@@ -85,7 +85,7 @@ int main(void)
 	struct curl_slist* header = NULL;
 
 	
-	header = curl_slist_append(header, "Authorization: Bearer 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");
+	header = curl_slist_append(header, "Authorization: Bearer API_KEY");
 	header = curl_slist_append(header, "Content-Type: application/json");
 	
 	if(header == NULL) 
