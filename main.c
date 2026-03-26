@@ -1,13 +1,15 @@
-   /*
-    *******************************************************************************************************
+/*
+*******************************************************************************************************
  _______  ___   __    _  _______ 
 |       ||   | |  |  | ||       | ->MAINTAINER : Aditya Kumar Singh									
-|  _____||   | |   |_| ||    ___|  ->#A Voice Automated AI Chatbot powered by ChatGPT (OpenAI) API																		
+|  _____||   | |   |_| ||    ___| 	=>Voice Automated AI Chatbot powered by ChatGPT (OpenAI) API																		
 | |_____ |   | |       ||   | __   															
 |_____  ||   | |  _    ||   ||  |  																
  _____| ||   | | | |   ||   |_| |																
 |_______||___| |_|  |__||_______|         																
-    */
+    
+*******************************************************************************************************
+*/
 
 
 #include <stdio.h>
@@ -50,7 +52,7 @@ int main(void)
 	fgets(text, LENGTH , file);
 	fclose(file);
     //remove newline character and replace it with null terminator just in case	
-	size_t len = strlen(text); // possible redundancy here
+	size_t len = strlen(text);
 	if(len > 0 && text[len - 1] == '\n')
 	{
 		text[len - 1] = '\0';	
