@@ -5,3 +5,6 @@
 - converting user's audio input to text and putting that text into a file
 - reading that text from that file and passing it to chatGPT's API (Completion Model : text-davinci-003)
 - speaking and printing that response
+
+
+The code is absolute dogshit. Do excuse this. I was a noob at the time.
