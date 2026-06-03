@@ -11,7 +11,7 @@
 *******************************************************************************************************
 */
 
-extern const* char API_KEY;
+extern const char* API_KEY;
 
 #include <stdio.h>
 #include <curl/curl.h>
