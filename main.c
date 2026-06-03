@@ -11,6 +11,7 @@
 *******************************************************************************************************
 */
 
+extern const* char API_KEY;
 
 #include <stdio.h>
 #include <curl/curl.h>
@@ -86,8 +87,10 @@ int main(void)
 
 	struct curl_slist* header = NULL;
 
+	char auth_header[256];
+	snprintf(auth_header, sizeof(auth_header), "Authorization: Bearer %s", API_KEY);
 	
-	header = curl_slist_append(header, "Authorization: Bearer API_KEY");
+	header = curl_slist_append(header, auth_header);
 	header = curl_slist_append(header, "Content-Type: application/json");
 	
 	if(header == NULL) 
